@@ -1,5 +1,5 @@
 # Retro Arcade Game
-I built a mini retro game console by assembling a hardware kit with a pre-programmed PCB. Soldering each component was a fun challenge, and seeing the game come to life on the screen was incredibly rewarding. This project taught me attention to detail and the basics of electronics assembly.
+I built a mini retro game console by assembling a hardware kit with a pre-programmed PCB. Soldering each component was a fun challenge, and seeing the game come to life on the screen was incredibly rewarding. This project taught me attention to detail and the basics of electronics assembly
 
 You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
 ```HTML 
