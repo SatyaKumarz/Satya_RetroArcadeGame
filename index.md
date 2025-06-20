@@ -1,4 +1,4 @@
-# Retro Arcade Game
+# Ball Tracking Robot
 I built a mini retro game console by assembling a hardware kit with a pre-programmed PCB. Soldering each component was a fun challenge, and seeing the game come to life on the screen was incredibly rewarding. This project taught me attention to detail and the basics of electronics assembly
 
 You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
@@ -33,7 +33,7 @@ You should comment out all portions of your portfolio that you have not complete
 
 # First Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
+I completed my first milestone, which was building the chassis and finishing the wiring. I assembled the chassis, which involved adding the wheels and attaching them to the motors. I also added the battery pack  to the back. Then I soldered the wires to the motors and I finished the wiring. I connected
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CaCazFBhYKs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
