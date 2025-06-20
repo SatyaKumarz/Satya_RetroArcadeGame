@@ -21,7 +21,7 @@ You should comment out all portions of your portfolio that you have not complete
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-
+![Headstone Image](chassis and wiring.png)
 
 
 # Second Milestone
@@ -35,7 +35,6 @@ You should comment out all portions of your portfolio that you have not complete
 
 I completed my first milestone, which was building the chassis and finishing the wiring. I assembled the chassis, which involved adding the wheels and attaching them to the motors. I also added the battery pack  to the back. Then I soldered the wires to the motors and I finished the wiring. I connected
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CaCazFBhYKs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 
