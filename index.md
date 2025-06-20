@@ -31,10 +31,31 @@ You should comment out all portions of your portfolio that you have not complete
 <iframe width="560" height="315" src="https://www.youtube.com/embed/y3VAmNlER5Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
-# First Milestone
+# Milestone 1: Chassis Assembly and Wiring Integration
+In the first phase of my ball tracking robot project, I focused on two foundational tasks: constructing the physical chassis and completing the electronic wiring necessary for motor control, sensor input, and data processing.
 
-I completed my first milestone, which was building the chassis and finishing the wiring. I assembled the chassis, which involved adding the wheels and attaching them to the motors. I also added the battery pack  to the back. Then I soldered the wires to the motors and I finished the wiring. I connected
+Chassis Construction
+I assembled a transparent acrylic robot chassis designed to accommodate all essential components including motors, sensors, a power source, and the Raspberry Pi. The chassis is lightweight yet sturdy, providing a solid base for mobile operations. It houses:
 
+Two yellow DC gear motors mounted in parallel for differential drive motion.
+
+A battery holder fixed to the top plate to power the motors and onboard electronics.
+
+Pre-drilled mounting holes that allow for secure attachment of sensors and circuit components.
+
+Motor and Driver Setup
+The motors are connected to an L298N motor driver module, which serves as the interface between the Raspberry Pi and the motors. This module allows for bidirectional control and PWM speed regulation. The IN1, IN2, IN3, IN4 pins on the driver are connected to GPIO pins on the Raspberry Pi, and the ENA and ENB jumpers are used to enable the motor channels.
+
+Sensor Wiring
+I integrated an ultrasonic distance sensor (HC-SR04) for obstacle detection. It is connected to the breadboard and powered through 5V and GND pins on the Raspberry Pi. The Trig and Echo pins are wired to GPIO pins, enabling distance measurements to help the robot avoid collisions while tracking the ball.
+
+Processing Unit and Camera Integration
+The robot uses a Raspberry Pi 4 as its central processing unit. This board controls the motors, reads sensor input, and processes the video feed. I also installed the Raspberry Pi Camera Module, which is connected via a ribbon cable to the CSI port on the Pi. This camera will be used to track the position of the ball using computer vision algorithms in later stages.
+
+Breadboard Prototyping
+A mini solderless breadboard is used to connect various components, making it easy to prototype and reconfigure the circuit during development. Jumper wires neatly route power and signals between the Raspberry Pi, motor driver, ultrasonic sensor, and other modules.
+
+This milestone lays the groundwork for future development, which will include software implementation, real-time video processing, and motor control based on camera input. All components are properly wired and mounted, making the system ready for software testing and calibration
 
 
 
