@@ -21,7 +21,7 @@ You should comment out all portions of your portfolio that you have not complete
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-![Headstone Image](chassis and wiring.png)
+
 
 
 # Second Milestone
@@ -45,7 +45,7 @@ A Raspberry Pi Camera Module is attached via a ribbon cable and will later be us
 
 With the chassis assembled and all electronics wired up, the robot is now ready for programming and sensor testing in the next phase
 
-
+![Headstone Image](chassis and wiring.png)
 
 
 # Schematics 
