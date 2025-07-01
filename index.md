@@ -57,17 +57,217 @@ With the chassis assembled and all electronics wired up, the robot is now ready 
 # Code
 Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
 
-```c++
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  Serial.println("Hello World!");
-}
+PYTHON
 
-void loop() {
-  // put your main code here, to run repeatedly:
+import time
+import cv2
+import numpy as np
+from picamera2 import Picamera2
+import RPi.GPIO as GPIO
 
-}
+# Initialize Picamera2
+picamera = Picamera2()
+picamera.configure(picamera.create_preview_configuration(main={"size": (640, 480)}))
+picamera.start()
+
+GPIO.setmode(GPIO.BCM)
+
+global thold_val
+global H_val
+global center
+H_val = 0
+thold_val = 0
+# Empty callback function for slider updates
+def Hval_trackbar(val):
+
+    H_val = val
+
+def thold_trackbar(val):
+    thold_val = val
+
+
+def color_subtract(img, color):
+    image_HSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV) #converts image from BGR to HSV
+    image_HSV = image_HSV[:,:,0] #gets rid of everything besides the Hue
+    image_HSV = np.asarray(image_HSV,np.int16) #turns every pixel number to an integer that can also go negative
+    image_HSV = abs(image_HSV - color) #turns the values absolute value
+    image_HSV = np.asarray(image_HSV,np.uint8) #it turns it into Opencv format
+    return image_HSV
+
+#MOTORS
+motor1B = 6  # LEFT motor
+motor1E = 5
+
+motor2B = 22  # RIGHT motor
+motor2E = 23
+
+en_a = 25  # Analog pins to control speed UNDERSTAND HOW THIS WORKS
+en_b = 24
+
+# Set all motors to outputs
+GPIO.setup(motor1B, GPIO.OUT)
+GPIO.setup(motor1E, GPIO.OUT)
+GPIO.setup(motor2B, GPIO.OUT)
+GPIO.setup(motor2E, GPIO.OUT)
+
+GPIO.setup(en_a, GPIO.OUT)
+GPIO.setup(en_b, GPIO.OUT)
+
+power_a = GPIO.PWM(en_a, 100)
+power_a.start(70)
+
+power_b = GPIO.PWM(en_b, 100)
+power_b.start(70)
+
+def forward():
+    print("moving f")
+    GPIO.output(motor1B, GPIO.HIGH)
+    GPIO.output(motor1E, GPIO.LOW)
+    GPIO.output(motor2B, GPIO.HIGH)
+    GPIO.output(motor2E, GPIO.LOW)
+
+def reverse():
+    GPIO.output(motor1B, GPIO.HIGH)
+    GPIO.output(motor1E, GPIO.LOW)
+    GPIO.output(motor2B, GPIO.HIGH)
+    GPIO.output(motor2E, GPIO.LOW)
+
+def leftturn():
+    print("turning left")
+    GPIO.output(motor1B, GPIO.LOW)
+    GPIO.output(motor1E, GPIO.LOW)
+    GPIO.output(motor2B, GPIO.HIGH)
+    GPIO.output(motor2E, GPIO.LOW)
+
+def rightturn():
+    print("turning right")
+    GPIO.output(motor1B, GPIO.HIGH)
+    GPIO.output(motor2B, GPIO.LOW)
+    GPIO.output(motor2E, GPIO.LOW)
+    GPIO.output(motor1E, GPIO.LOW)
+
+
+def stop():
+    GPIO.output(motor1B, GPIO.LOW)
+    GPIO.output(motor1E, GPIO.LOW)
+    GPIO.output(motor2B, GPIO.LOW)
+    GPIO.output(motor2E, GPIO.LOW)
+
+def sharp_left():
+    GPIO.output(motor1B, GPIO.HIGH)
+    GPIO.output(motor1E, GPIO.LOW)
+    GPIO.output(motor2B, GPIO.LOW)
+    GPIO.output(motor2E, GPIO.HIGH)
+
+def sharp_right():
+    GPIO.output(motor1B, GPIO.LOW)
+    GPIO.output(motor1E, GPIO.HIGH)
+    GPIO.output(motor2B, GPIO.HIGH)
+    GPIO.output(motor2E, GPIO.LOW)
+
+def back_left():
+    GPIO.output(motor1B, GPIO.HIGH)
+    GPIO.output(motor1E, GPIO.HIGH)
+    GPIO.output(motor2B, GPIO.HIGH)
+    GPIO.output(motor2E, GPIO.LOW)
+
+def back_right():
+    GPIO.output(motor1B, GPIO.HIGH)
+    GPIO.output(motor1E, GPIO.LOW)
+    GPIO.output(motor2B, GPIO.HIGH)
+    GPIO.output(motor2E, GPIO.HIGH)
+def find_ball(): # takes in nothing --> captures a picture aka change the variable center
+        global center
+        frame = picamera.capture_array()
+
+        # Convert frame to HSV color space
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+        # Define lower and upper bounds for red color detection in HSV
+        lower_red = np.array([120, 120, 120])
+        upper_red = np.array([180, 255, 255])
+
+        # Threshold the HSV image to get only red colors
+        mask = cv2.inRange(hsv, lower_red, upper_red)
+    
+        # Apply a series of erosions and dilations to reduce noise
+        mask = cv2.erode(mask, None, iterations=2)
+        mask = cv2.dilate(mask, None, iterations=2)
+        #convert to binaryimage
+
+        contours, _ = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Initialize center of the ball as None
+        center = None
+    # Proceed if at least one contour was found
+        if len(contours) > 0:
+        # Find the largest contour (assuming it's the ball)
+            c = max(contours, key=cv2.contourArea)
+
+        # Compute the minimum enclosing circle and centroid
+            ((x, y), radius) = cv2.minEnclosingCircle(c)
+            M = cv2.moments(c)
+            center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"])) # [0][:]
+            #x=center[0]
+            #print((x,y), radius)
+        # Only proceed if the radius meets a minimum size
+            if radius > 20:
+            # Draw the circle and centroid on the frame
+                print(radius)
+                cv2.circle(mask, (int(x), int(y)), int(radius), (255, 0, 0), 2)  # Red circle around the detected object
+                cv2.putText(mask, "Red Ball", (int(x - radius), int(y - radius)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
+        # Display the frame with detection (might need to look up displaying a binary img)
+        cv2.imshow('Frame', mask) #pulls up the window
+
+try:
+    while True:
+        # Capture frame-by-frame
+        find_ball()
+        while center:
+            stop()
+            power_a.ChangeDutyCycle(5)
+            power_b.ChangeDutyCycle(5)
+
+            while center and center[0] in range(280,360):
+                power_a.ChangeDutyCycle(5)
+                power_b.ChangeDutyCycle(5)
+                forward()
+                forward()
+                forward()
+                forward()
+                find_ball() # capture another picture and then continue forward
+            power_a.ChangeDutyCycle(5)
+            power_b.ChangeDutyCycle(5)
+
+                
+
+            find_ball()
+            while center and center[0] <280:
+                find_ball()
+                leftturn()
+            find_ball()
+            while center and center[0] >360:
+                find_ball()
+                rightturn()
+            
+            
+        if not center:
+            find_ball()
+            stop()
+            power_a.ChangeDutyCycle(1)
+            power_b.ChangeDutyCycle(1)
+            leftturn()
+        
+
+         # Exit if 'q' is pressed
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+finally:
+    cv2.destroyAllWindows()
+    picamera.stop()
+
+
 ```
 
 # Bill of Materials
