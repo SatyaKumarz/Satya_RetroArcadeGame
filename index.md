@@ -1,11 +1,7 @@
 # Ball Tracking Robot
 My ball tracking robot uses a camera to detect a red ball and follows it by moving in real time. It processes the camera feed to find the ball’s position and decides whether to move forward, turn left, or turn right based on where the ball is. If the ball isn’t visible, the robot spins in place to search for it again.
 
-You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
-```HTML 
-<!--- This is an HTML comment in Markdown -->
-<!--- Anything between these symbols will not render on the published site -->
-```
+
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
@@ -20,7 +16,7 @@ For my final milestone, I combined all the motor and camera code so that the rob
 The code begins by setting up the PiCamera to capture live images and initializing all the motor pins using GPIO. I created custom functions like `forward()`, `leftturn()`, `rightturn()`, and `stop()` to control how the robot moves. The most important part is the `find_ball()` function. It takes an image from the camera, converts it to HSV (which makes detecting red easier), filters for red using a mask, and then finds the biggest red shape on the screen. It calculates the center of that shape so the robot knows where the ball is. In the main loop, the robot checks the ball’s x-position: if it’s in the center of the screen, it moves forward; if it’s off to one side, it turns until the ball is centered. If the ball disappears, the robot spins to look for it. I made sure `find_ball()` is called constantly during each of these steps so the robot always knows what’s happening. Once I made that change, the robot finally moved smoothly and kept following the ball without stopping or glitching. This milestone was really exciting because it meant I had fully finished the brain of the robot and everything was finally working together.
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/O6RF35PxlI4?si=gt7fKRwOhrS0bdxz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 
