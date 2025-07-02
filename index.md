@@ -26,7 +26,7 @@ The code begins by setting up the PiCamera to capture live images and initializi
 For my second milestone, I finished writing all the code that controls my ball tracking robot. This was a really big deal for me because I had never coded before, and I had to learn everything from scratch. At first, I didn’t understand how to make the robot move or how the camera could detect a ball, but I kept researching, testing, and learning what each part of the code actually did. There are a few main parts in my code. First, I set up the camera using PiCamera2 so it can constantly take pictures of what’s in front of the robot. Then I used OpenCV to process those images. I converted the images to HSV color, which made it easier to detect red, and then I used masking to find only the red areas in the picture. After that, I found the contours of the red object and figured out the center and size of the ball. I also created different functions to move the motors in different directions, like forward, left, right, and stop. Finally, in the main loop, the robot uses the ball’s position to decide what to do—if the ball is centered, it drives forward; if the ball is on the left or right, it turns until the ball is centered again. If it can’t see the ball, it spins in place to search for it. Writing this code was definitely one of the hardest parts of the project, but also the most fun and rewarding, because now my robot can actually see and follow a red ball on its own—and I understand how it all works.
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/y3VAmNlER5Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wrUXDa5EN08?si=n9cLEHzhw59oGwR8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 # Milestone 1: Chassis Assembly and Wiring Completed
@@ -43,6 +43,8 @@ A Raspberry Pi Camera Module is attached via a ribbon cable and will later be us
 
 With the chassis assembled and all electronics wired up, the robot is now ready for programming and sensor testing in the next phase
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0V2S65AZBQQ?si=xxf8z3XwhUdGQnZP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ![Headstone Image](chassis and wiring.png)
 
 
@@ -53,7 +55,7 @@ With the chassis assembled and all electronics wired up, the robot is now ready 
 # Code
 Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
 
-PYTHON
+```py
 
 import time
 import cv2
@@ -262,8 +264,6 @@ try:
 finally:
     cv2.destroyAllWindows()
     picamera.stop()
-
-
 ```
 
 # Bill of Materials
@@ -286,7 +286,5 @@ One of the best parts about Github is that you can view how other people set up 
 
 For my project, I’m building a mini retro game console using a hardware kit. It includes a pre-programmed PCB, buttons, resistors, a screen, and other components that I’ll solder onto the board. So far, I’ve reviewed the instructions and identified each part. A future challenge will be learning to solder accurately, but I plan to practice and follow each step carefully to complete the build and get the game running. Since my previous milestone, I’ve soldered several key components onto the PCB, including resistors, buttons, and the screen. This was my first time soldering, and I was surprised by how precise and steady-handed the process needs to be. At first, I struggled with getting clean connections, but after some practice, my technique improved. Before the final milestone, I need to finish soldering the remaining components and test the board to ensure the game runs properly. Since my previous milestone, I fully assembled the retro game console by successfully soldering all components to the PCB. One of my biggest challenges at BSE was learning to solder precisely, but completing the project without errors felt like a huge win. I gained hands-on experience with circuit boards, hardware assembly, and how code interacts with electronics. Moving forward, I hope to learn more about how to write and upload code to microcontrollers, and eventually design my own circuits from scratch
 ![Headstone Image](IMG_7048 (2) (1).png)
-# Schematics 
-Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
 
-To watch the BSE tutorial on how to create a portfolio, click here.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0V2S65AZBQQ?si=xxf8z3XwhUdGQnZP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
