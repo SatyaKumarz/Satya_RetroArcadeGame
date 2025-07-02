@@ -7,7 +7,7 @@ My ball tracking robot uses a camera to detect a red ball and follows it by movi
 |:--:|:--:|:--:|:--:|
 | Satya K. | Northville High School | Electrical Engineering | Incoming Junior
 
-
+![Headstone Image](SatyaK.png)
   
 # Final Milestone
 
